@@ -4,11 +4,11 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date default trunc(sysdate)
   )
     /*
-      @Procedure: Ghi nh?n thông tin ??ng ký KPI cho [CHU K?];
+      @Procedure: Ghi nh?n thï¿½ng tin ??ng kï¿½ KPI cho [CHU K?];
       @author: thuattq1
       
       @params:  
-      i_input_date : Ngày c?n t?ng h?p thông tin ??ng ký (chu?n nh?t là ngày cu?i chu k? mu?n ghi nh?n KPI).
+      i_input_date : Ngï¿½y c?n t?ng h?p thï¿½ng tin ??ng kï¿½ (chu?n nh?t lï¿½ ngï¿½y cu?i chu k? mu?n ghi nh?n KPI).
     */
   as  
     i_kpi_period KPI_REGISTER.kpi_period%type := 1;-- 1 chu ky; 2: nam;
@@ -131,8 +131,8 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
       s.max_value, vv_run_date, vv_run_date,
       'SYS');
     
-    /* Xóa dòng d? li?u t?ng h?p th?a:
-       Tr??ng h?p: ko t?n t?i b? ??ng ký h?p lý (KPI_REGISTER, KPI_GROUP_CONFIG, KPI_GROUP_DETAIL, KPI_CONFIG)*/
+    /* Xï¿½a dï¿½ng d? li?u t?ng h?p th?a:
+       Tr??ng h?p: ko t?n t?i b? ??ng kï¿½ h?p lï¿½ (KPI_REGISTER, KPI_GROUP_CONFIG, KPI_GROUP_DETAIL, KPI_CONFIG)*/
     delete RPT_KPI_CYCLE rpt
     where (rpt.kpi_register_id, rpt.cycle_id, rpt.kpi_group_config_id, rpt.kpi_config_id) in (
         select d.kpi_register_id
@@ -145,8 +145,8 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
           and d.run_date          < vv_run_date
       );
       
-    /* Xóa dòng d? li?u t?ng h?p th?a:
-       Tr??ng h?p: ko khai báo KPI_QUOTA, ho?c khai báo KPI_QUOTA.WEIGHTED <= 0*/
+    /* Xï¿½a dï¿½ng d? li?u t?ng h?p th?a:
+       Tr??ng h?p: ko khai bï¿½o KPI_QUOTA, ho?c khai bï¿½o KPI_QUOTA.WEIGHTED <= 0*/
     delete RPT_KPI_CYCLE rkce
     where rkce.cycle_id = vv_period_value
       and (
@@ -200,7 +200,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
       ) -- nhung ton tai KPI gan cho NV
     ;
     
-    -- Xóa dòng ??ng ký th?a.
+    -- Xï¿½a dï¿½ng ??ng kï¿½ th?a.
     delete KPI_REGISTER_HIS d
     where d.kpi_period        = i_kpi_period
       and d.kpi_period_value  = vv_period_value
@@ -216,14 +216,14 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     , i_max_value  number
     , i_param      varchar2
   ) return number
-  /*@Procedure: Tính ?i?m KPI;
+  /*@Procedure: Tï¿½nh ?i?m KPI;
     @author: thuattq1
     
     @params:  
       i_plan_value: s? li?u k? ho?ch  
       i_gain_value: s? li?u th?c hi?n
       i_weighted  : tr?ng s?
-      i_max_value : c?n trên
+      i_max_value : c?n trï¿½n
   */
   is
     vv_gain_per  number;
@@ -281,7 +281,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     , i_gain_value  number
     , i_param       varchar2
   ) return number
-  /*@Procedure: Tính ?i?m chi ti?t tham s? KPI;
+  /*@Procedure: Tï¿½nh ?i?m chi ti?t tham s? KPI;
     @author: thuattq1
     
     @params:  
@@ -345,19 +345,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [Kh?i l??ng tiêu th? vào h? th?ng so v?i k? ho?ch; C1; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [Kh?i l??ng tiï¿½u th? vï¿½o h? th?ng so v?i k? ho?ch; C1; chu k?];
     @author: thuattq1
     
     @params:  
       i_object_type         : Lo?i ??i t??ng: 1: C1 c? th?.
       i_object_id           : ID C1.
-      i_kpi_period_value    : ID giá tr? k?.
-      i_kpi_group_config_id : ID nhóm KPI.
+      i_kpi_period_value    : ID giï¿½ tr? k?.
+      i_kpi_group_config_id : ID nhï¿½m KPI.
       i_kpi_config_id       : ID KPI.
-      i_kpi_config_code     : Mã KPI.
-      i_plan_type           : lo?i phân b?: 1: ko phân b?; 2: có phân b?.
+      i_kpi_config_code     : Mï¿½ KPI.
+      i_plan_type           : lo?i phï¿½n b?: 1: ko phï¿½n b?; 2: cï¿½ phï¿½n b?.
       i_kpi_reg_id          : ID KPI_REGISTER.
-      i_max_value           : Giá tr? tr?n (max ??t ???c).
+      i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -717,19 +717,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [doanh s?, s?n l??ng nh?p; npp; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [doanh s?, s?n l??ng nh?p; npp; chu k?];
     @author: thuattq1
     
     @params:  
     i_object_type         : Lo?i ??i t??ng: 1: NPP c? th?.
     i_object_id           : ID NPP.
-    i_kpi_period_value    : ID giá tr? k?.
-    i_kpi_group_config_id : ID nhóm KPI.
+    i_kpi_period_value    : ID giï¿½ tr? k?.
+    i_kpi_group_config_id : ID nhï¿½m KPI.
     i_kpi_config_id       : ID KPI.
-    i_kpi_config_code     : Mã KPI.
-    i_plan_type           : lo?i phân b?: 1: ko phân b?; 2: có phân b?.
+    i_kpi_config_code     : Mï¿½ KPI.
+    i_plan_type           : lo?i phï¿½n b?: 1: ko phï¿½n b?; 2: cï¿½ phï¿½n b?.
     i_kpi_reg_id          : ID KPI_REGISTER.
-    i_max_value           : Giá tr? tr?n (max ??t ???c).
+    i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -1069,19 +1069,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date  date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [doanh s?, s?n l??ng; nhân viên; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [doanh s?, s?n l??ng; nhï¿½n viï¿½n; chu k?];
     @author: thuattq1
     
     @params:  
-      i_object_type         : Lo?i ??i t??ng: 2: nhân viên; 4: lo?i nhân viên.
-      i_object_id           : ID nhân viên/lo?i nv.
-      i_kpi_period_value    : ID giá tr? k?.
-      i_kpi_group_config_id : ID nhóm KPI.
+      i_object_type         : Lo?i ??i t??ng: 2: nhï¿½n viï¿½n; 4: lo?i nhï¿½n viï¿½n.
+      i_object_id           : ID nhï¿½n viï¿½n/lo?i nv.
+      i_kpi_period_value    : ID giï¿½ tr? k?.
+      i_kpi_group_config_id : ID nhï¿½m KPI.
       i_kpi_config_id       : ID KPI.
-      i_kpi_config_code     : Mã KPI.
-      i_plan_type           : lo?i phân b?: 1: ko phân b?; 2: có phân b?.
+      i_kpi_config_code     : Mï¿½ KPI.
+      i_plan_type           : lo?i phï¿½n b?: 1: ko phï¿½n b?; 2: cï¿½ phï¿½n b?.
       i_kpi_reg_id          : ID KPI_REGISTER.
-      i_max_value           : Giá tr? tr?n (max ??t ???c).
+      i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -1515,19 +1515,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [k? ho?ch l? trình; nhân viên; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [k? ho?ch l? trï¿½nh; nhï¿½n viï¿½n; chu k?];
     @author: thuattq1
     
     @params:  
-    i_object_type         : Lo?i ??i t??ng: 2: nhân viên; 4: lo?i nhân viên.
-    i_object_id           : ID nhân viên/lo?i nv.
-    i_kpi_period_value    : ID giá tr? k?.
-    i_kpi_group_config_id : ID nhóm KPI.
+    i_object_type         : Lo?i ??i t??ng: 2: nhï¿½n viï¿½n; 4: lo?i nhï¿½n viï¿½n.
+    i_object_id           : ID nhï¿½n viï¿½n/lo?i nv.
+    i_kpi_period_value    : ID giï¿½ tr? k?.
+    i_kpi_group_config_id : ID nhï¿½m KPI.
     i_kpi_config_id       : ID KPI.
-    i_kpi_config_code     : Mã KPI.
-    i_plan_type           : lo?i phân b?: 2: có phân b? (ch? l?y phân b?).
+    i_kpi_config_code     : Mï¿½ KPI.
+    i_plan_type           : lo?i phï¿½n b?: 2: cï¿½ phï¿½n b? (ch? l?y phï¿½n b?).
     i_kpi_reg_id          : ID KPI_REGISTER.
-    i_max_value           : Giá tr? tr?n (max ??t ???c).
+    i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -1878,19 +1878,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [k? ho?ch l? trình; nhân viên; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [k? ho?ch l? trï¿½nh; nhï¿½n viï¿½n; chu k?];
     @author: thuattq1
     
     @params:  
-    i_object_type         : Lo?i ??i t??ng: 2: nhân viên; 4: lo?i nhân viên.
-    i_object_id           : ID nhân viên/lo?i nv.
-    i_kpi_period_value    : ID giá tr? k?.
-    i_kpi_group_config_id : ID nhóm KPI.
+    i_object_type         : Lo?i ??i t??ng: 2: nhï¿½n viï¿½n; 4: lo?i nhï¿½n viï¿½n.
+    i_object_id           : ID nhï¿½n viï¿½n/lo?i nv.
+    i_kpi_period_value    : ID giï¿½ tr? k?.
+    i_kpi_group_config_id : ID nhï¿½m KPI.
     i_kpi_config_id       : ID KPI.
-    i_kpi_config_code     : Mã KPI.
-    i_plan_type           : lo?i phân b?: 2: có phân b? (ch? l?y phân b?).
+    i_kpi_config_code     : Mï¿½ KPI.
+    i_plan_type           : lo?i phï¿½n b?: 2: cï¿½ phï¿½n b? (ch? l?y phï¿½n b?).
     i_kpi_reg_id          : ID KPI_REGISTER.
-    i_max_value           : Giá tr? tr?n (max ??t ???c).
+    i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -2271,19 +2271,19 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     i_input_date date
   )
   /*
-    @Procedure t?ng h?p KPI liên quan [Quá h?n, gia h?n giao nh?n; npp; chu k?];
+    @Procedure t?ng h?p KPI liï¿½n quan [Quï¿½ h?n, gia h?n giao nh?n; npp; chu k?];
     @author: thuattq1
     
     @params:  
     i_object_type         : Lo?i ??i t??ng: 1: NPP c? th?.
     i_object_id           : ID NPP.
-    i_kpi_period_value    : ID giá tr? k?.
-    i_kpi_group_config_id : ID nhóm KPI.
+    i_kpi_period_value    : ID giï¿½ tr? k?.
+    i_kpi_group_config_id : ID nhï¿½m KPI.
     i_kpi_config_id       : ID KPI.
-    i_kpi_config_code     : Mã KPI.
-    i_plan_type           : lo?i phân b?: 1: ko phân b?;
+    i_kpi_config_code     : Mï¿½ KPI.
+    i_plan_type           : lo?i phï¿½n b?: 1: ko phï¿½n b?;
     i_kpi_reg_id          : ID KPI_REGISTER.
-    i_max_value           : Giá tr? tr?n (max ??t ???c).
+    i_max_value           : Giï¿½ tr? tr?n (max ??t ???c).
   */
   as  
     v_sql clob; 
@@ -2301,7 +2301,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     v_count_param   number;
     v_cycle_edate CYCLE.end_date%type;
     
-    SUB_SCORE     constant number(2) := 5; -- s? ?i?m tr? khi quá h?n(?vt: ?i?m)
+    SUB_SCORE     constant number(2) := 5; -- s? ?i?m tr? khi quï¿½ h?n(?vt: ?i?m)
     PERCENT_APPLY constant number(2) := 5; -- quota b?t ??u tr? ?i?m (?vt: %)
     
     v_pro_name      constant varchar2(200) := 'P_KPI_PO_OUTOF_SHOP_CYCLE';
@@ -2523,7 +2523,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
             v_error_msg  := SQLCODE || ' : ' || SUBSTR (sqlerrm, 1, 1000);
           end;
           
-          -- tính % ko k?p nh?n.
+          -- tï¿½nh % ko k?p nh?n.
           if nvl(v_dta(indx).plan_value, 0) = 0 
               or nvl(v_dta(indx).gain, 0) - nvl(v_dta(indx).plan_value, 0) > 0
           then
@@ -2533,10 +2533,10 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
             v_percent := (v_dta(indx).plan_value - v_dta(indx).gain) * 100 / v_dta(indx).plan_value;
           end if;
           
-          -- tính s? ?i?m tr?.
+          -- tï¿½nh s? ?i?m tr?.
           v_sub_score := trunc(v_percent / PERCENT_APPLY) * SUB_SCORE;
           
-          -- tính ?i?m còn l?i = (s? ?i?m ???c nh?n t?i ?a) - (s? ?i?m b? tr?)
+          -- tï¿½nh ?i?m cï¿½n l?i = (s? ?i?m ???c nh?n t?i ?a) - (s? ?i?m b? tr?)
           v_score := (v_dta(indx).weighted / 100) - v_sub_score;
           
           if v_score < 0 then
@@ -2709,7 +2709,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
     end if;
     
     -- c?p nh?t ??i t??ng ?k KPI theo d? li?u DB.
-    -- SOS: tr??ng h?p ch?y cho quá kh? có th? ko c?p nh?t.
+    -- SOS: tr??ng h?p ch?y cho quï¿½ kh? cï¿½ th? ko c?p nh?t.
     if (i_update_kpi_register = 1) then
       P_KPI_REGISTER_HIS_FCYCLE (vv_kpi_date);
     end if;
@@ -2728,7 +2728,7 @@ create or replace PACKAGE BODY          PKG_KPI_CYCLE AS
       
         dbms_output.put_line('run procedure: ' || v_kpi.procedure_code);
         if v_kpi.procedure_code = 'P_KPI_SALE_PLAN_SHOP_CYCLE' then
-            -- KPI liên quan [xxx ; nhân viên; chu k?]
+            -- KPI liï¿½n quan [xxx ; nhï¿½n viï¿½n; chu k?]
             dbms_output.put_line('execute: ' || v_kpi.procedure_code || ' for kpi: ' || v_kpi.code);
             P_KPI_SALE_PLAN_SHOP_CYCLE ( 
                 v_kpi.OBJECT_TYPE, v_kpi.OBJECT_ID, v_cycle_id, 
